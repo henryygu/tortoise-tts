@@ -24,9 +24,11 @@ if __name__ == '__main__':
     parser.add_argument('--seed', type=int, help='Random seed which can be used to reproduce results.', default=None)
     parser.add_argument('--produce_debug_state', type=bool, help='Whether or not to produce debug_state.pth, which can aid in reproducing problems. Defaults to true.', default=True)
 
+    
+    
     args = parser.parse_args()
     tts = TextToSpeech(models_dir=args.model_dir)
-
+    print(args.textfile)
     outpath = args.output_path
     selected_voices = args.voice.split(',')
     regenerate = args.regenerate
@@ -55,7 +57,20 @@ if __name__ == '__main__':
 
         voice_samples, conditioning_latents = load_voices(voice_sel)
         all_parts = []
+        
+        try:
+            file_list = os.listdir(voice_outpath)
+            file_list = [f for f in file_list if f.endswith('.wav')]
+            file_list.sort(key=lambda x: int(x.split('.')[0]))
+            top_file = int(os.path.splitext(file_list[len(file_list)-1])[0])
+        except:
+            top_file = -1
+        
+        print(len(texts))
         for j, text in enumerate(texts):
+            if j < top_file:
+                continue
+            
             if regenerate is not None and j not in regenerate:
                 all_parts.append(load_audio(os.path.join(voice_outpath, f'{j}.wav'), 24000))
                 continue
