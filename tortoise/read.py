@@ -70,7 +70,8 @@ if __name__ == '__main__':
         for j, text in enumerate(texts):
             if j < top_file:
                 continue
-            
+            print(j, "out of", len(texts))
+            print(args.textfile)
             if regenerate is not None and j not in regenerate:
                 all_parts.append(load_audio(os.path.join(voice_outpath, f'{j}.wav'), 24000))
                 continue
