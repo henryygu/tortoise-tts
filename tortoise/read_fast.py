@@ -61,7 +61,20 @@ if __name__ == '__main__':
 
         voice_samples, conditioning_latents = load_voices(voice_sel)
         all_parts = []
+        
+        try:
+            file_list = os.listdir(voice_outpath)
+            file_list = [f for f in file_list if f.endswith('.wav')]
+            file_list.sort(key=lambda x: int(x.split('.')[0]))
+            top_file = int(os.path.splitext(file_list[len(file_list)-1])[0])
+        except:
+            top_file = -1
+        
+
+        
         for j, text in enumerate(texts):
+            if j < top_file:
+                continue
             if regenerate is not None and j not in regenerate:
                 all_parts.append(load_audio(os.path.join(voice_outpath, f'{j}.wav'), 24000))
                 continue
@@ -69,6 +82,8 @@ if __name__ == '__main__':
             gen = tts.tts(text, voice_samples=voice_samples, use_deterministic_seed=seed)
             end_time = time()
             audio_ = gen.squeeze(0).cpu()
+            print(j," of ",len(texts), " for ", outpath)
+            print("top_file: ",top_file)
             print("Time taken to generate the audio: ", end_time - start_time, "seconds")
             print("RTF: ", (end_time - start_time) / (audio_.shape[1] / 24000))
             torchaudio.save(os.path.join(voice_outpath, f'{j}.wav'), audio_, 24000)
