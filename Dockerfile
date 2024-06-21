@@ -15,7 +15,7 @@ ENV CONDA_DIR "${HOME}/miniconda"
 ENV PATH="$CONDA_DIR/bin":$PATH
 ENV CONDA_AUTO_UPDATE_CONDA=false
 ENV PIP_DOWNLOAD_CACHE="$HOME/.pip/cache"
-ENV TORTOISE_MODELS_DIR
+ENV TORTOISE_MODELS_DIR="$HOME/tortoise-tts/build/lib/tortoise/models"
 
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda3.sh \
     && bash /tmp/miniconda3.sh -b -p "${CONDA_DIR}" -f -u \
@@ -28,7 +28,7 @@ SHELL ["/bin/bash", "--login", "-c"]
 
 RUN conda create --name tortoise python=3.9 numba inflect \
     && conda activate tortoise \
-    && conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia \
-    && conda install transformers=4.29.2 \
+    && conda install pytorch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 pytorch-cuda=12.1 -c pytorch -c nvidia \
+    && conda install transformers=4.31.0 \
     && cd /app \
     && python setup.py install

@@ -37,7 +37,7 @@ well..... not so slow anymore now we can get a **0.25-0.3 RTF** on 4GB vram and 
 
 See [this page](http://nonint.com/static/tortoise_v2_examples.html) for a large list of example outputs.
 
-A cool application of Tortoise + GPT-3 (not affiliated with this repository): https://twitter.com/lexman_ai. Unfortunately, this proejct seems no longer to be active.
+A cool application of Tortoise + GPT-3 (not affiliated with this repository): https://twitter.com/lexman_ai. Unfortunately, this project seems no longer to be active.
 
 ## Usage guide
 
@@ -45,7 +45,7 @@ A cool application of Tortoise + GPT-3 (not affiliated with this repository): ht
 
 If you want to use this on your own computer, you must have an NVIDIA GPU.
 
-On Windows, I **highly** recommend using the Conda installation path. I have been told that if you do not do this, you
+On Windows, I **highly** recommend using the Conda installation method. I have been told that if you do not do this, you
 will spend a lot of time chasing dependency problems.
 
 First, install miniconda: https://docs.conda.io/en/latest/miniconda.html
@@ -218,7 +218,7 @@ credit a few of the amazing folks in the community that have helped make this ha
 
 ## Notice
 
-Tortoise was built entirely by me using my own hardware. My employer was not involved in any facet of Tortoise's development.
+Tortoise was built entirely by the author (James Betker) using their own hardware. Their employer was not involved in any facet of Tortoise's development.
 
 ## License
 
